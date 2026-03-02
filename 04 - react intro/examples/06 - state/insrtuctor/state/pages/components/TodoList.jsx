@@ -19,6 +19,7 @@ export default function TodoList() {
         automatically re-renders.
     */
     const [todoText, setTodoText] = useState("")
+    const [todoList, setTodoList] = useState([])
 
     const onTodoTextChange = (event) => {
         console.log(event.target.value)
@@ -28,6 +29,17 @@ export default function TodoList() {
 
     const onAddTodoClick = () => {
         console.log("button clicked!")
+        
+        // When the add button is clicked, take the input field text (from the state variable todoText)
+        const newTodos = [...todoList, todoText] // spread operator -> unpacks an array into its individual terms
+        console.log(newTodos)
+
+        // and add it to the stateful array (state variable todoList) using its setter.
+        setTodoList(newTodos)
+
+        // as a detail-oriented UX courtesy, reset the input field upon submission
+        setTodoText("")
+
     }
 
     return <Box sx={{ flexGrow: 1 }}>
@@ -59,7 +71,8 @@ export default function TodoList() {
             </Grid>
 
             <Grid item xs={12}>
-                Current input text: {todoText}
+              Current input text: {todoText} <br/>
+              Current TodoList: {todoList.toString()}
             </Grid>
 
         </Grid>
