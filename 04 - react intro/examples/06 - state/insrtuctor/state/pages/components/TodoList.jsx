@@ -7,6 +7,11 @@ import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
+
+
 export default function TodoList() {
 
     /* [stateVariable, stateVariableSetter] = useState(defaultValue) 
@@ -70,10 +75,20 @@ export default function TodoList() {
               >Add Todo</Button>
             </Grid>
 
-            <Grid item xs={12}>
-              Current input text: {todoText} <br/>
-              Current TodoList: {todoList.toString()}
-            </Grid>
+
+            <List sx={{ width: '100%' }}>
+                {todoList.map(
+                    (todoItem, index) => {
+                        return <ListItem key={index}>
+                            <ListItemText>
+                                <Typography>
+                                    {todoItem}
+                                </Typography>
+                            </ListItemText>
+                        </ListItem>
+                    }
+                )}
+            </List>
 
         </Grid>
     </Box>
