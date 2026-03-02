@@ -1,3 +1,6 @@
+import {useState} from 'react';
+
+// MUI components
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
@@ -6,8 +9,21 @@ import Typography from '@mui/material/Typography';
 
 export default function TodoList() {
 
+    /* [stateVariable, stateVariableSetter] = useState(defaultValue) 
+        
+        [variable, function] -> think [noun, verb]
+
+        The setter is the *only* thing allowed to change the value of the state variable.
+
+        When the setter function fires (i.e. data in the state variable changes), the component
+        automatically re-renders.
+    */
+    const [todoText, setTodoText] = useState("")
+
     const onTodoTextChange = (event) => {
         console.log(event.target.value)
+        // Call the state variable's setter with a new value to write to the state variable.
+        setTodoText(event.target.value)
     }
 
     const onAddTodoClick = () => {
@@ -31,6 +47,7 @@ export default function TodoList() {
                     variant="standard"
                     sx={{ width: '100%' }}
                     onChange={onTodoTextChange}
+                    value={todoText}
                 />
             </Grid>
 
@@ -39,6 +56,10 @@ export default function TodoList() {
                 variant="contained"
                 onClick={onAddTodoClick}
               >Add Todo</Button>
+            </Grid>
+
+            <Grid item xs={12}>
+                Current input text: {todoText}
             </Grid>
 
         </Grid>
