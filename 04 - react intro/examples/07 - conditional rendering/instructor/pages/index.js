@@ -139,6 +139,20 @@ export default function Home() {
             </Grid>
           </form>
           <List sx={{width: `100%`}}>
+          {/* the && (AND) operator says, "if the first term resolves truthy, then do the next thing"
+              In this case:  (movies doesn't have items -> show "no results found")
+
+              The idea here is, always communicate to your user; don't just show nothing if data is empty.
+          */}
+          {!movies.length &&
+            <ListItem>
+              <ListItemText>
+               <Typography variant="p" component="div">
+                No results; please search again.
+               </Typography>
+              </ListItemText>
+            </ListItem>
+          }
           { movies.map((movieData, index)=> {
               return <ListItem key={index}>
                 <ListItemText>
