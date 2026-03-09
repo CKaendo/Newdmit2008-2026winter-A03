@@ -143,16 +143,22 @@ export default function Home() {
               In this case:  (movies doesn't have items -> show "no results found")
 
               The idea here is, always communicate to your user; don't just show nothing if data is empty.
+
+              Using && is good when you don't have anything specific you need to do/render if the check *fails*.
+              However, *if* you want to render "A" if the check passes, and "B" if the check fails, use a ternary:
+                condition ? A : B
           */}
-          {!movies.length &&
             <ListItem>
               <ListItemText>
                <Typography variant="p" component="div">
-                No results; please search again.
+                { movies.length === 0 ?
+                  "No results; please search again."
+                  :
+                  `${movies.length} movies found:`
+                }
                </Typography>
               </ListItemText>
             </ListItem>
-          }
           { movies.map((movieData, index)=> {
               return <ListItem key={index}>
                 <ListItemText>
