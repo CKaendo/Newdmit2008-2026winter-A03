@@ -30,11 +30,46 @@ export default function Home() {
   // this is just what we're displaying from
   const [movies, setMovies] = useState(MOVIE_LIST)
 
+  // state variable for storing error message
+  const [errorMsg, setErrorMsg] = useState("")
+
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(`search: ${searchText}`)
     console.log(`year: ${year}`)
+    validateForm();
     filterMovies();
+  }
+
+  const isValidYear = (value) => {
+    // Make sure the string value can resolve to a number, and that it's 4 digits,
+    // 'cause they ain't makin' cinema in the age of Charlemagne.
+    return !isNaN(year) && year.trim().length === 4
+  }
+
+  const validateForm = () => {
+    /* The only validation I need to do here is making sure the year is OK.
+       This means:
+        1. If there's no input in the year field, there's gonna be no issue.
+        2. If there is input, I need to make sure it's a valid number.
+    */
+
+    // 1. no input in year -> automatically pass check
+    if (year.trim().length === 0) {
+      // we'll be using a blank error message when all is OK to control conditional rendering
+      setErrorMsg("");
+      return
+    }
+
+    // 2.a) there is input in year field, but it's invalid
+    if (!isValidYear(year)) {
+      setErrorMsg(`${year} is not a valid year.`);
+      return // escapes function block immediately
+    }
+
+    // 2.b) there is input in year field, and it's valid!
+    //      -> this means we've already passed the check above, so nothing to do here except...
+    setErrorMsg("")
   }
 
   const filterMovies = () => {
@@ -134,7 +169,14 @@ export default function Home() {
                 >Filter</Button>
               </Grid>
               <Grid item xs={10}>
-                {/* Add the error message here*/}
+                {/* Add the error message here
+
+                    Again, I'm using && here because I want to show something here
+                    *only if* there is an error.
+                */}
+                { errorMsg && 
+                  <Alert severity="error">{errorMsg}</Alert>
+                }
               </Grid>
             </Grid>
           </form>
@@ -154,7 +196,7 @@ export default function Home() {
                 { movies.length === 0 ?
                   "No results; please search again."
                   :
-                  `${movies.length} movies found:`
+                  `Movies found: ${movies.length} `
                 }
                </Typography>
               </ListItemText>
