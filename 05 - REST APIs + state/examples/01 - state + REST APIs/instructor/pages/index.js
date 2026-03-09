@@ -28,14 +28,6 @@ export default function Home() {
   })
 
   const handleClick = () => {
-    /* OK, so we were having some issues with fetching from the zenquotes API.
-       I'll take you through a step-by-step process of how I found out what was wrong.
-
-       Like I mentioned in some of your Assignment 1 feedback, separating API & UI layers
-       makes code more readable & debugging less of a confusing headache, so let's start there.
-    
-       First, we'll just make an API call and look in the console.
-    */
     getRandomQuote()
   }
 
