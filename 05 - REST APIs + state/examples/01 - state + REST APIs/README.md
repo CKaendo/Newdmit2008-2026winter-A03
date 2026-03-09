@@ -45,7 +45,7 @@ Note: as a review of state, state can contain any type of data structure here we
 - the last step we're going to do is we're going to change the jsx so that when we change the `quoteData` object, its' reflected in the state.
 ```js
 <Typography variant="h5" align="center" color="text.primary" paragraph>
-  {quoteData.q}
+  {quoteData.quote}
 </Typography>
 <Typography
   component="h1"

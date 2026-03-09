@@ -1,7 +1,12 @@
+// react hooks
+import { useState } from 'react';
+
+// nextjs copmonents/stylesheets
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 
+// MUI components
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -11,8 +16,13 @@ import Container from '@mui/material/Container';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 
+
 export default function Home() {
 
+  const [quoteData, setQuoteData] = useState({
+    quote: "Quote text here",
+    author: "Author name here"
+  })
 
   return (
     <div>
@@ -42,7 +52,7 @@ export default function Home() {
             }}
           >
             <Typography variant="h5" align="center" color="text.primary" paragraph>
-              Quote here.
+              {quoteData.quote}
             </Typography>
             <Typography
               component="h1"
@@ -51,7 +61,7 @@ export default function Home() {
               color="text.secondary"
               gutterBottom
             >
-              Author here
+              {quoteData.author}
             </Typography>
             <Box
              display="flex"
