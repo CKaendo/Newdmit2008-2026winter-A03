@@ -34,7 +34,12 @@ const API_BASE_URL = 'http://localhost:5000'
 
 export default function Home() {
 
+  const [title, setTitle]       = useState("")
+  const [comments, setComments] = useState("")
+  const [rating, setRating]     = useState(0)
+
   const [reviews, setReviews] = useState([])
+
 
   const loadReviews = () => {
     fetch(`${API_BASE_URL}/reviews`) // made my request
@@ -75,6 +80,8 @@ export default function Home() {
                   label="Adaptation Title"
                   fullWidth
                   variant="standard"
+                  value={title}
+                  onChange={(e) => {setTitle(e.target.value)}}
                 />
               </Grid>
 
@@ -85,6 +92,8 @@ export default function Home() {
                   label="Comments"
                   fullWidth
                   variant="standard"
+                  value={comments}
+                  onChange={(e) => {setComments(e.target.value)}}
                 />
               </Grid>
 
@@ -95,6 +104,8 @@ export default function Home() {
                     row
                     aria-labelledby="adaptation-rating"
                     name="rating-buttons-group"
+                    value={rating}
+                    onChange={(e) => {setRating(e.target.value)}}
                   >
                     <FormControlLabel value="1" control={<Radio />} label="1" />
                     <FormControlLabel value="2" control={<Radio />} label="2" />
