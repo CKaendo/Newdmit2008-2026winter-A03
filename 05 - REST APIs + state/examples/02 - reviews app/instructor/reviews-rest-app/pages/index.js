@@ -50,6 +50,13 @@ export default function Home() {
       })
   }
 
+
+  const submitReview = (event) => {
+    event.preventDefault();
+    console.log('form submitted; values were:')
+    console.log(`title: ${title}, comments: ${comments}`)
+  }
+
   return (
     <div>
       <Head>
@@ -69,7 +76,9 @@ export default function Home() {
       <main>
         <Container maxWidth="md">
 
-          <form>
+          <form
+            onSubmit={submitReview}
+          >
 
             <Grid container spacing={3}>
 
