@@ -53,8 +53,40 @@ export default function Home() {
 
   const submitReview = (event) => {
     event.preventDefault();
-    console.log('form submitted; values were:')
-    console.log(`title: ${title}, comments: ${comments}`)
+    fetch(`http://localhost:5000/reviews`,
+      // we can also pass an object of various specifics as the 2nd param for fetch:
+      {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json'       
+        },
+        // because we're sending data to a REST API, we encode it as JSON; this is
+        // a language-agnostic format. APIs don't necessarily know about JS objects!
+        body: JSON.stringify(
+          {
+            // notice how for JSON.stringify, we can just declare the variable
+            // if its name matches the JSON field
+            title,
+            // in this case, it's slightly different, so I have to do field: varName
+            comment: comments,
+            rating
+          }
+        )
+      }
+    ).then((response)=> {
+      return response.json()
+    }).then((data)=> {
+      // when we POST and create something anew, usually a (well-configured) REST API
+      // sends us back a body response with the thing we just created.
+      console.log(data)
+      resetForm();
+    })
+  }
+
+  const resetForm = () => {
+    setTitle("")
+    setComments("")
+    setRating(0)
   }
 
   return (
