@@ -2,7 +2,7 @@
 import { useState } from 'react';
 
 // API functions - we're in components dir now, so the import path changes accordingly
-import { postReview } from '../api/movies';
+import { getReviews, postReview } from '../api/movies';
 
 // layout components
 import Grid from '@mui/material/Grid';
@@ -64,6 +64,12 @@ export default function ReviewForm({ reviews, onReviewsChange }) {
     resetForm();
   }
 
+  const loadReviews = () => {
+    getReviews().then((moviesData) => {
+      onReviewsChange(moviesData)
+    })
+  }
+
   return (
     <form
       onSubmit={submitReview}
@@ -119,12 +125,21 @@ export default function ReviewForm({ reviews, onReviewsChange }) {
          </FormControl>
         </Grid>
 
-        <Grid item xs={12} sm={12}>
+        <Grid item xs={12} sm={3}>
           <Button
             variant="contained"
             type="submit"
           >
             Add New Review
+          </Button>
+        </Grid>
+
+        <Grid item xs={12} sm={4}>
+          <Button
+            variant="outlined"
+            onClick={loadReviews}
+          >
+            Load All Current Reviews
           </Button>
         </Grid>
 

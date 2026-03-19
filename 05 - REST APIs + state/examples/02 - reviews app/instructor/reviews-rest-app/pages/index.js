@@ -1,15 +1,11 @@
 // hooks
 import { useState } from 'react';
 
-// our own API functions
-import { getReviews } from './api/movies';
-
 // nextjs components
 import Head from 'next/head'
 
 // MUI components
 import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 
 import Container from '@mui/material/Container';
@@ -25,13 +21,6 @@ import ReviewForm from './components/ReviewForm';
 export default function Home() {
 
   const [reviews, setReviews] = useState([])
-
-
-  const loadReviews = () => {
-    getReviews().then((moviesData) => {
-      setReviews(moviesData)
-    })
-  }
 
   return (
     <div>
@@ -57,18 +46,6 @@ export default function Home() {
             reviews={reviews}
             onReviewsChange={setReviews}
           />
-
-          {/* I could also pop this in the form, since technically it's also input behaviour.
-              We'll start next class with that!
-          */}
-          <Box sx={{pt: 2, pb: 2 }}>
-            <Button
-              variant="contained"
-              onClick={loadReviews}
-            >
-              Load All Current Reviews
-            </Button>
-          </Box>
 
           {reviews.map((adaptation, index)=> {
             return <ReviewCard
